@@ -100,7 +100,7 @@ trait InventoryWorldControl extends InventoryAware with WorldAware with SideRest
 
     val blockPos = position.offset(facing)
     var extracted: Int = InventoryUtils.inventoryAt(blockPos) match {
-      case Some(inventory) => inventory.isUseableByPlayer(fakePlayer) && mayInteract(blockPos, facing.getOpposite)
+      case Some(inventory) if inventory.isUseableByPlayer(fakePlayer) && mayInteract(blockPos, facing.getOpposite) =>
         InventoryUtils.extractAnyFromInventory(InventoryUtils.insertIntoInventory(_, this.inventory, slots = Option(insertionSlots)), inventory, facing.getOpposite, count)
       case _ => 0
     }
